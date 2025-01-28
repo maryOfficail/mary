@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Mari Clan</title>
-  <!-- Google Font 추가 -->
   <link href="https://fonts.googleapis.com/css2?family=Playwrite+IN&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <style>
@@ -14,6 +13,7 @@
       background-color: #f4f4f4;
       color: #333;
       line-height: 1.8;
+      scroll-behavior: smooth;
     }
     header {
       background-color: #B22222;
@@ -30,6 +30,36 @@
       font-size: 18px;
       margin: 5px 0;
     }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #8B0000;
+      z-index: 1000;
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #B22222;
+    }
+    nav a.active {
+      background: #B22222;
+    }
     main {
       max-width: 800px;
       margin: 30px auto;
@@ -39,7 +69,9 @@
       border-radius: 8px;
     }
     section {
-      margin-bottom: 30px;
+      padding: 50px 20px;
+      margin-bottom: 20px;
+      scroll-margin-top: 70px;
     }
     section h2 {
       color: #B22222;
@@ -48,10 +80,6 @@
       border-bottom: 2px solid #B22222;
       display: inline-block;
       margin-bottom: 10px;
-    }
-    section p {
-      margin: 10px 0;
-      font-size: 16px;
     }
     .logo {
       text-align: center;
@@ -64,11 +92,6 @@
     .highlight {
       color: #B22222;
       font-weight: bold;
-    }
-    hr {
-      margin: 20px 0;
-      border: none;
-      border-top: 1px solid #E9967A;
     }
     .links a {
       display: inline-block;
@@ -84,15 +107,37 @@
     .links a:hover {
       background-color: #8B0000;
     }
-    .footer-icons a {
-      margin: 0 10px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 24px;
-      transition: color 0.3s ease;
+    .rankings {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
     }
-    .footer-icons a:hover {
-      color: #FFD700;
+    .rank-item {
+      padding: 10px;
+      background: #f8f8f8;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .member-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    .member-list p {
+      margin: 0;
+      padding: 8px 15px;
+      background: #B22222;
+      color: white;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .highlight-box {
+      background: #FFF3E0;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
     }
     footer {
       text-align: center;
@@ -105,45 +150,40 @@
       margin: 5px 0;
       font-size: 14px;
     }
-    footer .footer-icons {
-      margin: 15px 0;
-    }
-    .footer-icons i {
-      margin: 0 10px;
-      cursor: pointer;
-    }
 
-    /* 반응형 디자인 */
     @media (max-width: 768px) {
       header h1 {
         font-size: 30px;
       }
-      header p {
+      nav ul {
+        gap: 20px;
+      }
+      nav a {
         font-size: 16px;
+        padding: 8px 15px;
       }
       main {
         margin: 10px;
         padding: 15px;
-        box-shadow: none;
+      }
+      section {
+        padding: 40px 15px;
       }
       section h2 {
         font-size: 22px;
       }
-      section p {
-        font-size: 14px;
-      }
       .logo img {
         width: 150px;
       }
-      .links a {
-        font-size: 14px;
-        padding: 8px 12px;
+      .rankings {
+        grid-template-columns: 1fr;
       }
-      .footer-icons a {
-        font-size: 20px;
+      .member-list {
+        gap: 10px;
       }
-      footer p {
-        font-size: 12px;
+      .member-list p {
+        padding: 6px 12px;
+        font-size: 13px;
       }
     }
 
@@ -151,28 +191,32 @@
       header h1 {
         font-size: 24px;
       }
+      nav ul {
+        gap: 10px;
+      }
+      nav a {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
       main {
         margin: 5px;
         padding: 10px;
       }
+      section {
+        padding: 30px 10px;
+      }
       section h2 {
         font-size: 20px;
-      }
-      section p {
-        font-size: 12px;
       }
       .logo img {
         width: 120px;
       }
-      .links a {
-        font-size: 12px;
-        padding: 6px 10px;
+      .member-list {
+        flex-direction: column;
       }
-      .footer-icons a {
-        font-size: 18px;
-      }
-      footer p {
-        font-size: 10px;
+      .member-list p {
+        width: fit-content;
+        margin: 5px 0;
       }
     }
   </style>
@@ -183,75 +227,132 @@
     <p>마리 클랜 공식 홈페이지 입니다</p>
   </header>
 
+  <nav>
+    <ul>
+      <li><a href="#intro">클랜소개</a></li>
+      <li><a href="#members">클랜원</a></li>
+      <li><a href="#notice">공지</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+  </nav>
+
   <main>
     <div class="logo">
       <img src="mary_clan_image.jpg" alt="Mari Clan 로고">
     </div>
 
-    <section>
+    <section id="intro">
       <h2>📋 Clan Information</h2>
       <p>
         <strong>SINCE:</strong> <span class="highlight">2017.12.09</span> ~ ing<br>
         <strong>CLAN NAME:</strong> <span class="highlight">마리</span><br>
         <strong>CLAN LV.15:</strong> [ <span style="color: #228B22;">EXP +27%</span>, 
         <span style="color: #1E90FF;">MINERAL +25%</span>, 
-        <span style="color: #FF4500;">CRITICAL +1.25%</span> ]
-      </p>
-    </section>
-
-    <section>
-      <h2>🌟 Season 30 is coming! 🌟</h2>
-      <p>마리 클랜은 30시즌에서 최고의 성과를 목표로 하고 있습니다. 지금 바로 합류하세요!</p>
-    </section>
-
-    <section>
-      <h2>💎 Members</h2>
-      <p>
+        <span style="color: #FF4500;">CRITICAL +1.25%</span> ]<br>
         <strong>MASTER:</strong> 슬진<br>
-        <strong>SUB MASTER:</strong> 연희<br>
+        <strong>SUB MASTER:</strong> 연희
       </p>
+
+      <div class="rankings">
+        <div class="rank-item">20시즌 | 92위 Bronze</div>
+        <div class="rank-item">21시즌 | 67위 Silver</div>
+        <div class="rank-item">22시즌 | 86위 Bronze</div>
+        <div class="rank-item">23시즌 | 62위 Silver</div>
+        <div class="rank-item">24시즌 | (데이터 없음)</div>
+        <div class="rank-item">25시즌 | 35위 Gold</div>
+        <div class="rank-item">26시즌 | 27위 Gold</div>
+        <div class="rank-item">27시즌 | (봉인)</div>
+        <div class="rank-item">28시즌 | (봉인)</div>
+        <div class="rank-item">29시즌 | (봉인)</div>
+      </div>
     </section>
 
-    <section>
-      <h2>📈 Rankings</h2>
-      <p>
-        20 | 92위 Bronze<br>
-        21 | 67위 Silver<br>
-        22 | 86위 Bronze<br>
-        23 | 62위 Silver<br>
-        25 | 35위 Gold<br>
-        26 | 27위 Gold<br>
-        27 | (봉인)<br>
-        28 | (봉인)<br>
-        29 | (봉인)
-      </p>
+    <section id="members">
+      <h2>💎 Clan Members</h2>
+
+      <h3>정예  - 모집 중단단</h3>
+        <div class="member-list">
+          <p>없음음</p>
+        </div>
+      <div class="highlight-box">
+        <h3>정식 클랜원</h3>
+        <div class="member-list">
+          <p>Foxy</p>
+          <p>판득</p>
+          <p>명연</p>
+          <p>놈놈놈</p>
+          <p>심룡</p>
+          <p>어몬</p>
+          <p>휴마</p>
+          <p>hiroto</p>
+        </div>
+
+        <h3 style="margin-top: 25px;">30시즌 용병</h3>
+        <div class="member-list">
+          <p>거밍</p>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>💌 Join Us</h2>
-      <p>
-        <strong>정식 조건:</strong> 골업/시즌 총 <span class="highlight">2500기여</span><br>
-        <strong>용병 조건:</strong> 아업/하루 <span class="highlight">25기여</span> (미리기여 가능)
-      </p>
-      <p style="font-size: 14px; color: #B22222;">
-        미리 기여 제도 有: 다음날 해야 할 기여를 전날 미리 해도 인정됩니다!
-      </p>
+    <section id="notice">
+      <h2>📢 Notification</h2>
+      <div class="highlight-box">
+        <h3>30시즌 목표: 최종 Gold 티어 진입!</h3>
+        <p>
+          <strong>용병 조건:</strong><br>
+          - 하루 <span class="highlight">25기여</span> (미리기여 가능)<br>
+          - 아업 가능 유저
+        </p>
+        <p>
+          <strong>정식멤버 조건:</strong><br>
+          - 시즌 총 <span class="highlight">2500기여</span><br>
+          - 골드 업적 달성
+        </p>
+        <p style="color: #B22222; margin-top: 15px;">
+          ※ 미리 기여 제도: 다음날 기여를 전날 미리 수행 가능
+        </p>
+      </div>
     </section>
 
-    <section class="links">
-      <h2>📜 Links</h2>
-      <a href="http://pf.kakao.com/_Hngxbn" target="_blank">카카오톡 채널</a>
-      <a href="https://open.kakao.com/o/swKW9vDc" target="_blank">가입처 바로가기</a>
+    <section id="contact">
+      <h2>📞 문의처</h2>
+      <div class="links">
+        <a href="http://pf.kakao.com/_Hngxbn" target="_blank">카카오톡 채널</a>
+        <a href="https://open.kakao.com/o/swKW9vDc" target="_blank">가입처 바로가기</a>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-icons">
-      <a href="https://github.com/maryOfficail/mary" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="http://pf.kakao.com/_Hngxbn" target="_blank"><i class="fas fa-comment"></i></a>
-      <a href="mailto:maryofficial1209@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
-    <p>Powered by <strong>Team Duzz</strong></p>
+    <p>© 2024 Team Duzz. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const section = document.querySelector(this.getAttribute('href'));
+        section.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          const id = section.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(id)) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
